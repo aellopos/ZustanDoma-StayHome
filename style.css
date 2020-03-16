@@ -5,3 +5,8 @@
 #game {
     text-align: center;
 }
+
+body {
+    background: black;
+    padding: 5px;
+}
