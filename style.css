@@ -4,9 +4,31 @@
 
 #game {
     text-align: center;
+    margin-top: 30px;
 }
 
 body {
     background: black;
     padding: 5px;
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 900px;
+    margin: 20px auto 10px auto;
+}
+
+header img {
+    height: 30px;
+    margin-right: 10px;
+}
+
+#score,
+#time {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 20px;
 }
