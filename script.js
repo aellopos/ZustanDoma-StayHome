@@ -34,7 +34,8 @@ let player = {
 };
 
 let game = {
-    timeElement: document.getElementById('time')
+    timeElement: document.getElementById('time'),
+    time: 0
 };
 
 let hero = new Image();
@@ -56,6 +57,13 @@ function generateBoard() {
             }
         }
     }
+}
+
+function startGame() {
+    game.time = 90;
+    showTime();
+
+    draw();
 }
 
 function movement() {
@@ -94,8 +102,36 @@ function draw() {
 
     generateBoard();
     movement();
+    updateTime();
 
     ctx.drawImage(hero, player.x * blockSize, player.y * blockSize, blockSize, blockSize);
+}
+
+function showTime() {
+    // nikdy nechceme zobrazit čas menší než 0,
+    // pokud čas menší než 0, nastavíme ho na 0
+    if (game.time < 0) {
+        game.time = 0;
+    }
+
+    // z celkového počtu vteřin spočítáme minuty a vteřiny
+    let minutes = Math.floor(game.time / 60);
+    let seconds = Math.round(game.time - minutes * 60);
+
+    // spočítané minuty a vteřiny převedeme na formát mm:ss
+    let formattedTime = ('00' + minutes).slice(-2) + ':' + ('00' + seconds).slice(-2)
+
+    // naformátovaný čas vypíšeme na obrazovku
+    game.timeElement.textContent = formattedTime;
+}
+
+// provádí pravidelný odpočet času
+function updateTime() {
+    // odečteme od času 1/50 vteřiny
+    game.time = game.time - 1;
+
+    // zobrazíme aktualizovaný čas
+    showTime();
 }
 
 document.body.addEventListener("keydown", function(e) {
@@ -110,4 +146,4 @@ document.body.addEventListener("keyup", function(e) {
     draw();
 });
 
-window.addEventListener("load", draw);
+window.addEventListener("load", startGame);
