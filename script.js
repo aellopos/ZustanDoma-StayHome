@@ -3,6 +3,7 @@ let canvas = document.querySelector("#canvas"),
     blockSize = 30,
     width = 600,
     keys = [],
+    pills = [],
     height = 600;
 
 let board = [
@@ -44,24 +45,83 @@ hero.src = "images/down.png";
 let wall = new Image();
 wall.src = "images/wall.png";
 
+let pill1 = new Image();
+pill1.src = "images/pill1.png";
+
+let pill2 = new Image();
+pill2.src = "images/pill2.png";
+
+let pill3 = new Image();
+pill3.src = "images/pill3.png";
+
+let pill4 = new Image();
+pill4.src = "images/pill4.png";
+
+let fruit1 = new Image();
+fruit1.src = "images/fruit1.png";
+
+let fruit2 = new Image();
+fruit2.src = "images/fruit2.png";
+
 canvas.width = width;
 canvas.height = height;
 
-function generateBoard() {
-    ctx.fillStyle = "white";
+function createPills() {
+    pills.push({
+        x: 1,
+        y: 1,
+        imageObject: pill1
+    });
 
-    for (var y = 0; y < board.length; y++) {
-        for (var x = 0; x < board[y].length; x++) {
+    pills.push({
+        x: 1,
+        y: 15,
+        imageObject: pill2
+    });
+
+    pills.push({
+        x: 14,
+        y: 12,
+        imageObject: pill3
+    });
+
+    pills.push({
+        x: 15,
+        y: 18,
+        imageObject: pill4
+    });
+
+    pills.push({
+        x: 5,
+        y: 11,
+        imageObject: fruit1
+    });
+
+    pills.push({
+        x: 18,
+        y: 5,
+        imageObject: fruit2
+    });
+}
+
+function generateBoard() {
+    for (let y = 0; y < board.length; y++) {
+        for (let x = 0; x < board[y].length; x++) {
             if (board[y][x] === 1) {
                 ctx.drawImage(wall, x * blockSize, y * blockSize, blockSize, blockSize);
             }
         }
+    }
+
+    for (let i = 0; i < pills.length; i++) {
+        ctx.drawImage(pills[i].imageObject, pills[i].x * blockSize, pills[i].y * blockSize, blockSize, blockSize);
     }
 }
 
 function startGame() {
     game.time = 90;
     showTime();
+    createPills();
 
     draw();
 }
