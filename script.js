@@ -42,7 +42,7 @@ let game = {
 };
 
 let hero = new Image();
-hero.src = "images/player/right.png";
+hero.src = "images/player/doc_3.0_right.png";
 
 let wall = new Image();
 wall.src = "images/wall.png";
@@ -167,7 +167,7 @@ function movement() {
 
   if ((keys[37] || keys[65]) && canMove(player.x - 1, player.y)) {
     // šipka doleva
-    hero.src = "images/player/left.png";
+    hero.src = "images/player/doc_3.0._left.png";
     player.x--;
   }
 
