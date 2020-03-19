@@ -148,7 +148,7 @@ function timer(time) {
       display.innerText = minutes + ":" + seconds;
 
       if (--timer < 0) {
-        timer = duration;
+        timer = 0;
       }
     }, 1000);
   }
