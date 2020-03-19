@@ -31,7 +31,7 @@ let board = [
 
 let player = {
   x: 8,
-  y: 1
+  y: 2
 };
 
 let game = {
@@ -42,7 +42,7 @@ let game = {
 };
 
 let hero = new Image();
-hero.src = "images/down.png";
+hero.src = "images/player/right.png";
 
 let wall = new Image();
 wall.src = "images/wall.png";
@@ -159,25 +159,23 @@ function timer(time) {
 function movement() {
   if ((keys[39] || keys[68]) && canMove(player.x + 1, player.y)) {
     // šipka doprava
-    hero.src = "images/right.png";
+    hero.src = "images/player/right.png";
     player.x++;
   }
 
   if ((keys[37] || keys[65]) && canMove(player.x - 1, player.y)) {
     // šipka doleva
-    hero.src = "images/left.png";
+    hero.src = "images/player/left.png";
     player.x--;
   }
 
   if ((keys[38] || keys[87]) && canMove(player.x, player.y - 1)) {
     // šipka nahoru
-    hero.src = "images/up.png";
     player.y--;
   }
 
   if (keys[40] && canMove(player.x, player.y + 1)) {
     // šipka dolů
-    hero.src = "images/down.png";
     player.y++;
   }
 }
