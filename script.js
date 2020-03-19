@@ -31,7 +31,7 @@ let board = [
 
 let player = {
   x: 8,
-  y: 2
+  y: 1
 };
 
 let game = {
