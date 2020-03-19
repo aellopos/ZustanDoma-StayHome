@@ -36,6 +36,8 @@ let player = {
 
 let game = {
     timeElement: document.getElementById('time'),
+    scoreElement: document.getElementById('score'),
+    score: 0,
     time: 0
 };
 
@@ -173,8 +175,15 @@ function collect() {
         console.log(player.x + " " + pills[i].x);
         if (player.x == pills[i].x && player.y == pills[i].y) {
             pills.splice(i, 1);
+            increaseScore();
         }
     }
+}
+
+function increaseScore() {
+    game.score++;
+
+    game.scoreElement.textContent = `${game.score}/6`;
 }
 
 function showTime() {
