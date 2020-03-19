@@ -48,22 +48,22 @@ let wall = new Image();
 wall.src = "images/wall.png";
 
 let pill1 = new Image();
-pill1.src = "images/pill1.png";
+pill1.src = "images/collectibles/pill1.png";
 
 let pill2 = new Image();
-pill2.src = "images/pill2.png";
+pill2.src = "images/collectibles/pill2.png";
 
 let pill3 = new Image();
-pill3.src = "images/pill3.png";
+pill3.src = "images/collectibles/pill3.png";
 
 let pill4 = new Image();
-pill4.src = "images/pill4.png";
+pill4.src = "images/collectibles/pill4.png";
 
 let fruit1 = new Image();
-fruit1.src = "images/fruit1.png";
+fruit1.src = "images/collectibles/fruit1.png";
 
 let fruit2 = new Image();
-fruit2.src = "images/fruit2.png";
+fruit2.src = "images/collectibles/fruit2.png";
 
 canvas.width = width;
 canvas.height = height;
@@ -153,7 +153,7 @@ function timer(time) {
     }, 1000);
   }
   display = document.querySelector("#time");
-  startTimer(time, display);
+  startTimer(time - 1, display);
 }
 
 function movement() {
