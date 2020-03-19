@@ -1,1 +1,1 @@
-# Czechitas-game-2020
+# ZůstaňDoma (StayHome) game
