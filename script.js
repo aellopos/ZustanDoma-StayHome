@@ -163,8 +163,18 @@ function draw() {
     generateBoard();
     movement();
     updateTime();
+    collect();
 
     ctx.drawImage(hero, player.x * blockSize, player.y * blockSize, blockSize, blockSize);
+}
+
+function collect() {
+    for (let i = 0; i < pills.length; i++) {
+        console.log(player.x + " " + pills[i].x);
+        if (player.x == pills[i].x && player.y == pills[i].y) {
+            pills.splice(i, 1);
+        }
+    }
 }
 
 function showTime() {
