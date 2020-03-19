@@ -128,11 +128,11 @@ function generateBoard() {
 
 function startGame() {
   game.time = 90;
-  showTime();
   createPills();
   draw();
   timer(game.time);
 }
+// provádí pravidelný odpočet času
 function timer(time) {
   function startTimer(duration, display) {
     var timer = duration,
@@ -202,7 +202,6 @@ function draw() {
 
   generateBoard();
   movement();
-  updateTime();
   collect();
 
   ctx.drawImage(
@@ -230,16 +229,6 @@ function increaseScore() {
   game.scoreElement.textContent = `${game.score}/6`;
 }
 
-function showTime() {}
-
-// provádí pravidelný odpočet času
-function updateTime() {
-  // odečteme od času 1/50 vteřiny
-  //game.time = game.time - 1;
-
-  // zobrazíme aktualizovaný čas
-  showTime();
-}
 
 document.body.addEventListener("keydown", function(e) {
   keys[e.keyCode] = true;
