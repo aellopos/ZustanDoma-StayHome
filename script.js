@@ -48,13 +48,13 @@ let wall = new Image();
 wall.src = "images/wall.png";
 
 let pill1 = new Image();
-pill1.src = "images/collectibles/pill1.png";
+pill1.src = "images/collectibles/paper.png";
 
 let pill2 = new Image();
-pill2.src = "images/collectibles/pill2.png";
+pill2.src = "images/collectibles/lotion.png";
 
 let pill3 = new Image();
-pill3.src = "images/collectibles/pill3.png";
+pill3.src = "images/collectibles/face_mask.png";
 
 let pill4 = new Image();
 pill4.src = "images/collectibles/pill4.png";
@@ -128,6 +128,8 @@ function generateBoard() {
 
 function startGame() {
   game.time = 90;
+  var audio = new Audio('music/CoronaGameMix.wav');
+  audio.play();
   createPills();
   draw();
   timer(game.time);
@@ -159,7 +161,7 @@ function timer(time) {
 function movement() {
   if ((keys[39] || keys[68]) && canMove(player.x + 1, player.y)) {
     // šipka doprava
-    hero.src = "images/player/right.png";
+    hero.src = "images/player/doc_3.0_right.png";
     player.x++;
   }
 
