@@ -33,6 +33,10 @@ let player = {
   x: 8,
   y: 1
 };
+let villain = {
+  x: 12,
+  y: 18
+};
 
 let game = {
   timeElement: document.getElementById("time"),
@@ -64,6 +68,12 @@ fruit1.src = "images/collectibles/fruit1.png";
 
 let fruit2 = new Image();
 fruit2.src = "images/collectibles/fruit2.png";
+
+let enemy = new Image();
+enemy.src = "images/player/enemy-left.png";
+
+let preloadPlayer = new Image();
+preloadPlayer.src = "images/player/doc_3.0_right.png";
 
 canvas.width = width;
 canvas.height = height;
@@ -128,7 +138,7 @@ function generateBoard() {
 
 function startGame() {
   game.time = 90;
-  var audio = new Audio('music/CoronaGameMix.wav');
+  var audio = new Audio("music/CoronaGameMix.wav");
   audio.play();
   createPills();
   draw();
@@ -211,6 +221,21 @@ function draw() {
     blockSize,
     blockSize
   );
+  function moveEnemy() {
+    let xrandom = Math.floor(Math.random() * 19 + 1);
+    let yrandom = Math.floor(Math.random() * 19 + 1);
+    console.log("enemy spawning at " + xrandom + " & " + yrandom);
+    if (canMove(xrandom, yrandom)) {
+      ctx.drawImage(
+        enemy,
+        xrandom * blockSize,
+        yrandom * blockSize,
+        blockSize,
+        blockSize
+      );
+    }
+  }
+  moveEnemy();
 }
 
 function collect() {
@@ -228,7 +253,6 @@ function increaseScore() {
 
   game.scoreElement.textContent = `${game.score}/6`;
 }
-
 
 document.body.addEventListener("keydown", function(e) {
   keys[e.keyCode] = true;
