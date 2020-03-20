@@ -143,6 +143,8 @@ function startGame() {
   createPills();
   draw();
   timer(game.time);
+  moveEnemy();
+
 }
 // provádí pravidelný odpočet času
 function timer(time) {
@@ -221,26 +223,27 @@ function draw() {
     blockSize,
     blockSize
   );
-  function moveEnemy() {
-    let xrandom = Math.floor(Math.random() * 19 + 1);
-    let yrandom = Math.floor(Math.random() * 19 + 1);
-    console.log("enemy spawning at " + xrandom + " & " + yrandom);
-    if (canMove(xrandom, yrandom)) {
-      ctx.drawImage(
-        enemy,
-        xrandom * blockSize,
-        yrandom * blockSize,
-        blockSize,
-        blockSize
-      );
-    }
+
+}
+function moveEnemy() {
+  let xrandom = Math.floor(Math.random() * 19 + 1);
+  let yrandom = Math.floor(Math.random() * 19 + 1);
+  console.log("enemy spawning at " + xrandom + " & " + yrandom);
+  if (canMove(xrandom, yrandom)) {
+    ctx.drawImage(
+      enemy,
+      xrandom * blockSize,
+      yrandom * blockSize,
+      blockSize,
+      blockSize
+    );
+  } else {
+    moveEnemy();
   }
-  moveEnemy();
 }
 
 function collect() {
   for (let i = 0; i < pills.length; i++) {
-    console.log(player.x + " " + pills[i].x);
     if (player.x == pills[i].x && player.y == pills[i].y) {
       pills.splice(i, 1);
       increaseScore();
