@@ -45,29 +45,26 @@ let game = {
   time: 0
 };
 
+
 let hero = new Image();
 hero.src = "images/player/doc_3.0_right.png";
 
 let wall = new Image();
 wall.src = "images/wall.png";
 
-let pill1 = new Image();
-pill1.src = "images/collectibles/paper.png";
+let collectibles_images = [];
 
-let pill2 = new Image();
-pill2.src = "images/collectibles/lotion.png";
+collectibles_images[0] = new Image();
+collectibles_images[0].src = "images/collectibles/paper.png";
 
-let pill3 = new Image();
-pill3.src = "images/collectibles/face_mask.png";
+collectibles_images[1] = new Image();
+collectibles_images[1].src = "images/collectibles/lotion.png";
 
-let pill4 = new Image();
-pill4.src = "images/collectibles/pill4.png";
+collectibles_images[2] = new Image();
+collectibles_images[2].src = "images/collectibles/face_mask.png";
 
-let fruit1 = new Image();
-fruit1.src = "images/collectibles/fruit1.png";
-
-let fruit2 = new Image();
-fruit2.src = "images/collectibles/fruit2.png";
+collectibles_images[3]= new Image();
+collectibles_images[3].src = "images/collectibles/pill4.png";
 
 let enemy = new Image();
 enemy.src = "images/player/enemy-left.png";
@@ -79,41 +76,25 @@ canvas.width = width;
 canvas.height = height;
 
 function createPills() {
-  pills.push({
-    x: 1,
-    y: 1,
-    imageObject: pill1
-  });
+  console.log("pushing")
 
-  pills.push({
-    x: 1,
-    y: 15,
-    imageObject: pill2
-  });
-
-  pills.push({
-    x: 14,
-    y: 12,
-    imageObject: pill3
-  });
-
-  pills.push({
-    x: 15,
-    y: 18,
-    imageObject: pill4
-  });
-
-  pills.push({
-    x: 5,
-    y: 11,
-    imageObject: fruit1
-  });
-
-  pills.push({
-    x: 18,
-    y: 5,
-    imageObject: fruit2
-  });
+  for (var i = 0; i < collectibles_images.length; i++) {
+    console.log(i);
+    function SpawnPill() {
+    const randomX = Math.floor((Math.random())*20)
+    const randomY = Math.floor((Math.random())*20)
+    if (canMove(randomX, randomY)) {
+    pills.push({
+      x: randomX,
+      y: randomY,
+      imageObject: collectibles_images[i]
+    });
+   } else {
+     SpawnPill();
+   }
+  }
+  SpawnPill();
+  }
 }
 
 function generateBoard() {
@@ -136,6 +117,12 @@ function generateBoard() {
   }
 }
 
+function checkCollision() {
+  if(villain.x == player.x && villain.y == player.y) {
+    console.assert("Collided!");
+  }
+}
+
 function startGame() {
   game.time = 90;
   var audio = new Audio("music/CoronaGameMix.wav");
@@ -144,7 +131,6 @@ function startGame() {
   draw();
   timer(game.time);
   moveEnemy();
-
 }
 // provádí pravidelný odpočet času
 function timer(time) {
@@ -205,6 +191,9 @@ function canMove(x, y) {
 }
 
 function draw() {
+
+  checkCollision();
+
   ctx.clearRect(
     player.x * blockSize,
     player.y * blockSize,
@@ -237,6 +226,8 @@ function moveEnemy() {
       blockSize,
       blockSize
     );
+    villain.x = xrandom;
+    villain.y = yrandom;
   } else {
     moveEnemy();
   }
@@ -254,7 +245,7 @@ function collect() {
 function increaseScore() {
   game.score++;
 
-  game.scoreElement.textContent = `${game.score}/6`;
+  game.scoreElement.textContent = `${game.score}/${collectibles_images.length}`;
 }
 
 document.body.addEventListener("keydown", function(e) {
