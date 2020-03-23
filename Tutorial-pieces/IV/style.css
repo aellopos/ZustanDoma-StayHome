@@ -1,0 +1,14 @@
+#canvas {
+    /*Změna pozadí samotného canvasu*/
+    background-image: url('images/inside.png');
+}
+
+#game {
+    /*Umístění canvasu na střed stránky*/
+    text-align: center;
+}
+
+body {
+    /*Změna pozadí celé stránky*/
+    background-image: url('images/outside.png');
+}
