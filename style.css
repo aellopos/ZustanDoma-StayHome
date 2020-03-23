@@ -1,18 +1,19 @@
 #canvas {
-    border: 1px solid black;
-    background-image: url('images/background.png');
+    background-image: url('images/inside.png');
 }
 
 #game {
     text-align: center;
-    margin-top: 30px;
 }
 
 body {
     background: black;
     padding: 5px;
-    color: white;
-    font-family: 'Press Start 2P', cursive;
+    color: black;
+    font-family: 'calibry';
+    background-image: url('images/outside.png');
+    font-family: 'Bitter', serif;
+    font-weight: 700;
 }
 
 header {
@@ -28,8 +29,37 @@ header img {
     margin-right: 10px;
 }
 
-#score,
-#time {
-    font-family: 'Press Start 2P', cursive;
+#score, #time {
     font-size: 20px;
+}
+
+button {
+    margin-top: 30px;
+    padding: 20px 30px;
+    font-size: 20px;
+    line-height: 1;
+    border-radius: 60px;
+    border: 5px solid #ffc04b;
+    color: white;
+    background: linear-gradient(to bottom, #275786, #0e234d);
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+    outline: 0;
+    transition: all 0.2s;
+}
+
+#end {
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+    background-color: greenyellow;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#content {
+    text-align: center;
+    line-height: 1.5;
 }
