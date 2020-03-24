@@ -187,7 +187,7 @@ function movement() {
         player.y--;
     }
 
-    if (keys[40] && canMove(player.x, player.y + 1)) {
+    if ((keys[40] || keys[83]) && canMove(player.x, player.y + 1)) {
         // šipka dolů
         hero.src = "images/down.png";
         player.y++;
