@@ -43,8 +43,6 @@ let game = {
   time: 0
 };
 
-game.endElement.style.display = "none";
-
 let hero = new Image();
 hero.src = "images/down.png";
 
