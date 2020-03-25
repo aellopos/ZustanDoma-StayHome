@@ -1,37 +1,41 @@
 let canvas = document.querySelector("#canvas"),
-    ctx = canvas.getContext("2d"),
-    blockSize = 30,
-    width = 600,
-    keys = [],
-    pills = [],
-    height = 600;
+  ctx = canvas.getContext("2d"),
+  blockSize = 30,
+  width = 600,
+  keys = [],
+  pills = [],
+  height = 600;
 
 let board = [
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1],
-    [1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1],
-    [1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1],
-    [1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1],
-    [1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1],
-    [1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1],
-    [1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1],
-    [1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1],
-    [1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1],
-    [1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1],
-    [1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1],
-    [1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1],
-    [1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1],
+  [1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1],
+  [1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1],
+  [1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1],
+  [1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1],
+  [1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1],
+  [1, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1],
+  [1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1],
+  [1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1],
+  [1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1],
+  [1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1],
+  [1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1],
+  [1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ];
 
 let player = {
-    x: 8,
-    y: 1
+  x: 8,
+  y: 1
+};
+let villain = {
+  x: 12,
+  y: 18
 };
 
 let game = {
@@ -46,95 +50,80 @@ let game = {
 game.endElement.style.display = "none";
 
 let hero = new Image();
-hero.src = "images/down.png";
+hero.src = "images/player/doc_3.0_right.png";
 
 let wall = new Image();
 wall.src = "images/wall.png";
 
-let pill1 = new Image();
-pill1.src = "images/pill1.png";
+let collectibles_images = [];
 
-let pill2 = new Image();
-pill2.src = "images/pill2.png";
+collectibles_images[0] = new Image();
+collectibles_images[0].src = "images/collectibles/paper.png";
 
-let pill3 = new Image();
-pill3.src = "images/pill3.png";
+collectibles_images[1] = new Image();
+collectibles_images[1].src = "images/collectibles/lotion.png";
 
-let pill4 = new Image();
-pill4.src = "images/pill4.png";
+collectibles_images[2] = new Image();
+collectibles_images[2].src = "images/collectibles/face_mask.png";
 
-let fruit1 = new Image();
-fruit1.src = "images/fruit1.png";
+collectibles_images[3]= new Image();
+collectibles_images[3].src = "images/collectibles/pill4.png";
 
-let fruit2 = new Image();
-fruit2.src = "images/fruit2.png";
+let enemy = new Image();
+enemy.src = "images/player/enemy-left.png";
+
+let preloadPlayer = new Image();
+preloadPlayer.src = "images/player/doc_3.0_right.png";
 
 canvas.width = width;
 canvas.height = height;
 
 function createPills() {
-    pills.push({
-        x: 1,
-        y: 1,
-        imageObject: pill1
-    });
+  console.log("pushing")
 
+  for (var i = 0; i < collectibles_images.length; i++) {
+    console.log(i);
+    function SpawnPill() {
+    const randomX = Math.floor((Math.random())*20)
+    const randomY = Math.floor((Math.random())*20)
+    if (canMove(randomX, randomY)) {
     pills.push({
-        x: 1,
-        y: 15,
-        imageObject: pill2
+      x: randomX,
+      y: randomY,
+      imageObject: collectibles_images[i]
     });
-
-    pills.push({
-        x: 14,
-        y: 12,
-        imageObject: pill3
-    });
-
-    pills.push({
-        x: 15,
-        y: 18,
-        imageObject: pill4
-    });
-
-    pills.push({
-        x: 5,
-        y: 11,
-        imageObject: fruit1
-    });
-
-    pills.push({
-        x: 18,
-        y: 5,
-        imageObject: fruit2
-    });
+   } else {
+     SpawnPill();
+   }
+  }
+  SpawnPill();
+  }
 }
 
 function generateBoard() {
-    for (let y = 0; y < board.length; y++) {
-        for (let x = 0; x < board[y].length; x++) {
-            if (board[y][x] === 1) {
-                ctx.drawImage(wall, x * blockSize, y * blockSize, blockSize, blockSize);
-            }
-        }
+  for (let y = 0; y < board.length; y++) {
+    for (let x = 0; x < board[y].length; x++) {
+      if (board[y][x] === 1) {
+        ctx.drawImage(wall, x * blockSize, y * blockSize, blockSize, blockSize);
+      }
     }
+  }
 
-    for (let i = 0; i < pills.length; i++) {
-        ctx.drawImage(
-            pills[i].imageObject,
-            pills[i].x * blockSize,
-            pills[i].y * blockSize,
-            blockSize,
-            blockSize
-        );
-    }
+  for (let i = 0; i < pills.length; i++) {
+    ctx.drawImage(
+      pills[i].imageObject,
+      pills[i].x * blockSize,
+      pills[i].y * blockSize,
+      blockSize,
+      blockSize
+    );
+  }
 }
 
-function startGame() {
-    game.time = 10;
-    createPills();
-    draw();
-    timer(game.time);
+function checkCollision() {
+  if(villain.x == player.x && villain.y == player.y) {
+    console.assert("Collided!");
+  }
 }
 
 function endGame(type, timeTaken) {
@@ -147,7 +136,6 @@ function endGame(type, timeTaken) {
         game.endElement.style.display = "block";
     }
 }
-
 // provádí pravidelný odpočet času
 function timer(time) {
     function startTimer(duration, display) {
@@ -200,56 +188,72 @@ function movement() {
 }
 
 function canMove(x, y) {
-    return (
-        y >= 0 &&
-        y < board.length &&
-        x >= 0 &&
-        x < board[y].length &&
-        board[y][x] != 1
-    );
+  return (
+    y >= 0 &&
+    y < board.length &&
+    x >= 0 &&
+    x < board[y].length &&
+    board[y][x] != 1
+  );
 }
 
 function draw() {
-    ctx.clearRect(
-        player.x * blockSize,
-        player.y * blockSize,
-        blockSize,
-        blockSize
-    );
 
-    generateBoard();
-    movement();
-    collect();
+  checkCollision();
 
-    if (game.score === 6) {
-        endGame("win");
-    }
+  ctx.clearRect(
+    player.x * blockSize,
+    player.y * blockSize,
+    blockSize,
+    blockSize
+  );
 
+  generateBoard();
+  movement();
+  collect();
+
+  ctx.drawImage(
+    hero,
+    player.x * blockSize,
+    player.y * blockSize,
+    blockSize,
+    blockSize
+  );
+
+}
+function moveEnemy() {
+  let xrandom = Math.floor(Math.random() * 19 + 1);
+  let yrandom = Math.floor(Math.random() * 19 + 1);
+  console.log("enemy spawning at " + xrandom + " & " + yrandom);
+  if (canMove(xrandom, yrandom)) {
     ctx.drawImage(
-        hero,
-        player.x * blockSize,
-        player.y * blockSize,
-        blockSize,
-        blockSize
+      enemy,
+      xrandom * blockSize,
+      yrandom * blockSize,
+      blockSize,
+      blockSize
     );
+    villain.x = xrandom;
+    villain.y = yrandom;
+  } else {
+    moveEnemy();
+  }
 }
 
 function collect() {
-    for (let i = 0; i < pills.length; i++) {
-        console.log(player.x + " " + pills[i].x);
-        if (player.x == pills[i].x && player.y == pills[i].y) {
-            pills.splice(i, 1);
-            increaseScore();
-        }
+  for (let i = 0; i < pills.length; i++) {
+    if (player.x == pills[i].x && player.y == pills[i].y) {
+      pills.splice(i, 1);
+      increaseScore();
     }
+  }
 }
 
 function increaseScore() {
-    game.score++;
+  game.score++;
 
-    game.scoreElement.textContent = `${game.score}/6`;
+  game.scoreElement.textContent = `${game.score}/${collectibles_images.length}`;
 }
-
 
 document.body.addEventListener("keydown", function(e) {
     console.log("drawing");

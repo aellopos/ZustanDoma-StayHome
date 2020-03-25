@@ -2,33 +2,35 @@
 
 <html>
 
-<head lang="cs">
-    <title>Moje hra</title>
+<head lang="en">
+    <title>Corona game</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <link href="https://fonts.googleapis.com/css?family=Bitter:400,700&display=swap&subset=latin-ext" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="style.css">
+    <meta property="og:title" content="Corona game" />
+    <meta property="og:image" content="https://files.catbox.moe/gwzvnb.png" />
 </head>
 
 <body>
     <header>
         <div>
             <img src="images/score.png" alt="Vitamín">
-            <span id="score">0/6</span>
+            <span id="score">0/4</span>
         </div>
 
         <div id="time">
-            00:00
+            01:30
         </div>
     </header>
-
+<!--
     <div id="end">
         <div id="content">
             <p id="message">Hra skončila</p>
             <button onclick="location.reload()">Hrát znovu</button>
         </div>
     </div>
-
+-->
     <div id="game">
         <canvas id="canvas"></canvas>
     </div>
