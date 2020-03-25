@@ -1,11 +1,11 @@
 #canvas {
     background-image: url('images/inside.png');
 }
-
+ 
 #game {
     text-align: center;
 }
-
+ 
 body {
     color: black;
     font-family: 'calibry';
@@ -13,7 +13,7 @@ body {
     font-family: 'Bitter', serif;
     font-weight: 700;
 }
-
+ 
 header {
     display: flex;
     justify-content: space-between;
@@ -21,16 +21,16 @@ header {
     width: 900px;
     margin: 20px auto 10px auto;
 }
-
+ 
 header img {
     height: 30px;
     margin-right: 10px;
 }
-
+ 
 #score, #time {
     font-size: 20px;
 }
-
+ 
 button {
     margin-top: 30px;
     padding: 20px 30px;
@@ -45,7 +45,7 @@ button {
     outline: 0;
     transition: all 0.2s;
 }
-
+ 
 #end {
     width: 300px;
     height: 300px;
@@ -56,10 +56,11 @@ button {
     left: 50%;
     transform: translate(-50%, -50%);
 }
-
+#end p {
+    font-size: 2rem;
+}
+ 
 #content {
     text-align: center;
     line-height: 1.5;
-}
-#end {
 }

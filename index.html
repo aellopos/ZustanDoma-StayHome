@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-
+ 
 <html>
-
+ 
 <head lang="cs">
     <title>Moje hra</title>
     <meta charset="utf-8">
@@ -9,33 +9,31 @@
     <link href="https://fonts.googleapis.com/css?family=Bitter:400,700&display=swap&subset=latin-ext" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-
+ 
 <body>
     <header>
         <div>
             <img src="images/score.png" alt="Vitamín">
             <span id="score">0/6</span>
         </div>
-
+ 
         <div id="time">
             00:00
         </div>
     </header>
-
+ 
     <div id="end" style="display: none;">
         <div id="content">
-            <p>asdasdassssssssssss<br>ssssssssssasdqweqwasdasd</p>
-            <button>Hrát znovu</button>
+            <p id="message">Hra skončila</p>
+            <button onclick="location.reload()">Hrát znovu</button>
         </div>
     </div>
-
+ 
     <div id="game">
         <canvas id="canvas"></canvas>
     </div>
-
+ 
     <script src="script.js"></script>
 </body>
-
+ 
 </html>
-
-
