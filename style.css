@@ -56,9 +56,6 @@ button {
     left: 50%;
     transform: translate(-50%, -50%);
 }
-#end p {
-    font-size: 2rem;
-}
 
 #content {
     text-align: center;
