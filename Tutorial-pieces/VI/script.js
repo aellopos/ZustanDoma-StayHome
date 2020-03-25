@@ -33,9 +33,13 @@ let player = {
     y: 1
 };
 
-//vytváříme novou proměnnou, do které uložíme obrázek
+//vytváříme novou proměnnou, do které uložíme obrázek zdi
 let wall = new Image();
 wall.src = "images/wall.png";
+
+//vytváříme novou proměnnou, do které uložíme obrázek hlavní postavy
+let hero = new Image();
+hero.src = "images/down.png";
 
 //upravujeme výšku a šířku canvasu (naší herní plochy)
 canvas.width = width;
