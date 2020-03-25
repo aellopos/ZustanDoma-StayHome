@@ -48,13 +48,16 @@ button {
 
 #end {
     width: 300px;
-    height: 300px;
+    height: 230px;
     border-radius: 10px;
     background-color: greenyellow;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+#end p {
+    font-size: 2rem;
 }
 
 #content {
