@@ -38,9 +38,12 @@ let game = {
     timeElement: document.getElementById("time"),
     scoreElement: document.getElementById("score"),
     endElement: document.getElementById("end"),
+    endMessage: document.getElementById("message"),
     score: 0,
     time: 0
 };
+
+game.endElement.style.display = "none";
 
 let hero = new Image();
 hero.src = "images/down.png";
@@ -134,13 +137,14 @@ function startGame() {
     timer(game.time);
 }
 
-function endGame(type) {
+function endGame(type, timeTaken) {
     if (type === "win") {
-        game.endElement.style.display = "visible";
+        game.endElement.style.display = "block";
+        game.endMessage.innerText = `Vyhráli jste! Sesbírali jste všech 6 vitamínů za ${time}`;
     }
 
     if (type === "loss") {
-        game.endElement.style.display = "visible";
+        game.endElement.style.display = "block";
     }
 }
 
@@ -150,7 +154,7 @@ function timer(time) {
         var timer = duration,
             minutes,
             seconds;
-        setInterval(function() {
+        const CountDownInterval = setInterval(function() {
             minutes = parseInt(timer / 60, 10);
             seconds = parseInt(timer % 60, 10);
 
@@ -158,8 +162,9 @@ function timer(time) {
             seconds = seconds < 10 ? "0" + seconds : seconds;
 
             display.innerText = minutes + ":" + seconds;
-
-            if (timer-- < 0) {
+            game.time = timer;
+            if (timer-- == 0) {
+                clearInterval(CountDownInterval);
                 endGame("loss");
             }
         }, 1000);
@@ -247,15 +252,20 @@ function increaseScore() {
 
 
 document.body.addEventListener("keydown", function(e) {
-    keys[e.keyCode] = true;
+    console.log("drawing");
 
-    draw();
+    if(game.endElement.style.display == "none") {
+        keys[e.keyCode] = true;
+        draw();
+    }
 });
 
 document.body.addEventListener("keyup", function(e) {
-    keys[e.keyCode] = false;
-
-    draw();
+    console.log("drawing");
+    if(game.endElement.style.display == "none"){
+        keys[e.keyCode] = false;
+        draw();
+    } 
 });
 
 window.addEventListener("load", startGame);
