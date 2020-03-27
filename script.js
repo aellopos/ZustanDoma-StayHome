@@ -169,19 +169,19 @@ function timer(time) {
 }
 
 function movement() {
-    if ((keys[39] || keys[68]) && canMove(player.x + 1, player.y)) {
+    if ((keys[39] && canMove(player.x + 1, player.y)) {
         // šipka doprava
         hero.src = "images/right.png";
         player.x++;
     }
 
-    if ((keys[37] || keys[65]) && canMove(player.x - 1, player.y)) {
+    if (keys[37] && canMove(player.x - 1, player.y)) {
         // šipka doleva
         hero.src = "images/left.png";
         player.x--;
     }
 
-    if ((keys[38] || keys[87]) && canMove(player.x, player.y - 1)) {
+    if (keys[38] && canMove(player.x, player.y - 1)) {
         // šipka nahoru
         hero.src = "images/up.png";
         player.y--;
