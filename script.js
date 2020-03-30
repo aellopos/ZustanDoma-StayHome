@@ -169,7 +169,7 @@ function timer(time) {
 }
 
 function movement() {
-    if ((keys[39] && canMove(player.x + 1, player.y)) {
+    if (keys[39] && canMove(player.x + 1, player.y)) {
         // šipka doprava
         hero.src = "images/right.png";
         player.x++;
@@ -231,7 +231,6 @@ function draw() {
 
 function collect() {
     for (let i = 0; i < pills.length; i++) {
-        console.log(player.x + " " + pills[i].x);
         if (player.x == pills[i].x && player.y == pills[i].y) {
             pills.splice(i, 1);
             increaseScore();
