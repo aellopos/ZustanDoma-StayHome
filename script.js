@@ -170,14 +170,14 @@ function timer(time) {
       minutes = minutes < 10 ? "0" + minutes : minutes;
       seconds = seconds < 10 ? "0" + seconds : seconds;
  
-      display.innerText = minutes + ":" + seconds;
+      display.textContent = minutes + ":" + seconds;
       game.time = timer;
  
  
     }, 1000);
   }
-  display = document.querySelector("#time");
-  startTimer(time, display);
+
+  startTimer(time, game.timeElement);
 }
  
 function movement() {
