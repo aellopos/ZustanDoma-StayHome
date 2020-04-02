@@ -129,17 +129,16 @@ function generateBoard() {
 }
  
 function startGame() {
-  game.time = 30;
+  game.time = 3;
   createPills();
   draw();
   timer(game.time);
 }
  
-function endGame(type, timeTaken) {
+function endGame(type) {
   if (type === "win") {
     game.endElement.style.display = "block";
-    time = `${timeTaken[0]} minut a ${timeTaken[1]} sekund`;
-    game.endMessage.innerText = `Vyhráli jste! Sesbírali jste všech 6 vitamínů za ${time}`;
+    game.endMessage.innerText = `Vyhráli jste! Sesbírali jste všech 6 vitamínů za ${currentTime}`;
   }
  
   if (type === "loss") {
@@ -150,28 +149,28 @@ function endGame(type, timeTaken) {
  
 // provádí pravidelný odpočet času
 function timer(time) {
-  function startTimer(duration, display) {
+  function startTimer(duration) {
     var timer = duration,
       minutes,
       seconds;
-    const CountDownInterval = setInterval(function() {
+    let countDownInterval = setInterval(function() {
       minutes = parseInt(timer / 60, 10);
       seconds = parseInt(timer % 60, 10);
  
       if (game.score === 6) {
-        clearInterval(CountDownInterval);
-        endGame("win", [minutes, seconds]);
+        clearInterval(countDownInterval);
+        endGame("win");
       }
+
       if (timer-- == 0) {
-        clearInterval(CountDownInterval);
-        endGame("loss", [minutes, seconds]);
+        clearInterval(countDownInterval);
+        endGame("loss");
       }
      
       minutes = minutes < 10 ? "0" + minutes : minutes;
       seconds = seconds < 10 ? "0" + seconds : seconds;
  
-      display.textContent = minutes + ":" + seconds;
-      game.time = timer;
+      game.timeElement.textContent = minutes + ":" + seconds;
  
  
     }, 1000);
@@ -185,6 +184,7 @@ function movement() {
     // šipka doprava
     hero.src = "images/right.png";
     player.x++;
+    alert();
   }
  
   if ((keys[37] || keys[65]) && canMove(player.x - 1, player.y)) {
