@@ -7,8 +7,10 @@ let keys = [];
 let pills = [];
 let scoreElement = document.getElementById("score");
 let score = 0;
-let timeElement= document.getElementById("time");
+let timeElement = document.getElementById("time");
 let time = 0;
+let endElement = document.getElementById("end");
+let endMessage = document.getElementById("message");
 //mapa našeho bludiště, 1 = zeď, 0 = cesta
 let board = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -129,8 +131,10 @@ function generateBoard() {
 }
 
 function startGame() {
+    time = 60;
     createPills();
     draw();
+    timer();
 }
 
 function movement() {
@@ -170,10 +174,59 @@ function collect() {
     }
 }
 
+// zvyšuje a vypisuje skóre
 function increaseScore() {
     score++;
 
     scoreElement.textContent = `${score}/6`;
+}
+
+// provádí pravidelný odpočet času
+function timer() {
+    function startTimer() {
+        let timer = time;
+        let minutes = 0;
+        let seconds = 0;
+
+        let countDownInterval = setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            //výhra
+            if (score === 6) {
+                clearInterval(countDownInterval);
+                endGame("win", timer);
+            }
+
+            //prohra
+            if (timer == 0) {
+                clearInterval(countDownInterval);
+                endGame("loss");
+            }
+
+            timeElement.textContent = minutes + ":" + seconds;
+
+            timer--;
+
+        }, 1000);
+    }
+
+    startTimer();
+}
+
+function endGame(type, winTime) {
+    if (type === "win") {
+        endElement.style.display = "block";
+        endMessage.textContent = `Vyhráli jste! Sesbírali jste všechny vitamíny za ${time - winTime} sekund.`;
+    }
+
+    if (type === "loss") {
+        endElement.style.display = "block";
+        endMessage.textContent = `Prohráli jste! Nestihli jste sesbírat všechny vitamíny. Zkuste to znovu.`;
+    }
 }
 
 function canMove(x, y) {
@@ -185,20 +238,20 @@ function draw() {
     generateBoard();
     movement();
     collect();
-    ctx.drawImage(hero,player.x * blockSize, player.y * blockSize, blockSize, blockSize);
+    ctx.drawImage(hero, player.x * blockSize, player.y * blockSize, blockSize, blockSize);
 }
 
 //poslouchač událostí, čekáme (posloucháme) na načtení stránky, pak zavoláme funkci startGame
 window.addEventListener("load", startGame);
 
 // poslouchače událostí pro stisk klávesy
-document.body.addEventListener("keydown", function(e) {
+document.body.addEventListener("keydown", function (e) {
     keys[e.keyCode] = true;
 
     draw();
 });
 
-document.body.addEventListener("keyup", function(e) {
+document.body.addEventListener("keyup", function (e) {
     keys[e.keyCode] = false;
 
     draw();
